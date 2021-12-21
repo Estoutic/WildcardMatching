@@ -16,18 +16,16 @@ class WildcardMatcher:
                         identified_char = False
                         break
 
-                if not identified_char:
-                    print(False)
-                else:
-                    print(True)
+                print(identified_char)
+
             else:
                 print(False)
 
         else:
             count_of_characters = split_pattern.count("*")
             while count_of_characters != 0:
-                identified_char = None
-                for index in range(split_pattern.index("*") + 1):
+                identified_char = True
+                for index in range(split_pattern.index("*") - 1):
                     if split_pattern[index] != split_data[index]:
                         if split_pattern[index] != '?':
                             identified_char = False
@@ -36,12 +34,16 @@ class WildcardMatcher:
                     print(False)
                     break
                 start_index = split_pattern.index("*")
-                if len(split_pattern) != 1 and split_pattern.index("*") != len(split_pattern) - 1:
+                if len(split_pattern) != 1 and split_pattern.index("*") != len(split_pattern) - 1 and split_pattern.index("*") + 1 != len(split_pattern) -1:
                     while split_data[start_index] != split_pattern[split_pattern.index("*") + 1]:
                         start_index += 1
                         if start_index > len(split_data) - 1:
                             print(False)
                             count_of_characters -= 1
+                            break
+                        elif start_index == len(split_data) - 1:
+                            count_of_characters -= 1
+                            print(True)
                             break
                 else:
                     print(True)
