@@ -39,10 +39,6 @@ class WildcardMatcher:
                         count_of_characters -= 1
                         self.result = True
                     else:
-                        if split_data[start_index + 1] == split_pattern[split_pattern.index("*") + 1] or split_pattern[split_pattern.index("*") + 1] == '?':
-                            count_of_characters -= 1
-                            self.result = True
-
                         while split_data[start_index] != split_pattern[split_pattern.index("*") + 1]:
 
                             start_index += 1
