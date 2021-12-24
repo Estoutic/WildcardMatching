@@ -30,12 +30,12 @@ def is_match(data: str, pattern: str) -> bool:
             if len(split_data) - pattern_index + 1 != len(split_pattern) and count_of_characters == 0:
                 return False
 
-            if split_pattern.count("*") == len(split_pattern):
+            if split_pattern.count("*") == len(split_pattern) or split_pattern.index('*') == len(split_pattern) - 1:
                 return True
-            if split_pattern.index('*') == len(split_pattern) - 1:
-                return True
+
             if split_pattern[split_pattern.index('*') + 1] == '?':
                 count_of_characters -= 1
+
             else:
                 if start_index == 1:
                     start_index = 0
@@ -50,12 +50,11 @@ def is_match(data: str, pattern: str) -> bool:
 
                         if start_index != len(split_data):
                             if split_data[start_index] == split_pattern[split_pattern.index("*") + 1]:
-                                split_data = split_data[(start_index + 1):]
+                                split_data = split_data[(start_index):]
                                 split_pattern = split_pattern[(split_pattern.index("*") + 1):]
                                 count_of_characters -= 1
-
-                                if len(split_data) - pattern_index - 1 != len(split_pattern):
-                                    return False
                                 break
 
         return True
+# 123ab456cd
+# ?23*4?*?
